@@ -1,0 +1,15 @@
+[package]
+name = "rewolf-wow64ext-sys"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+build = "src/build.rs"
+
+[dependencies]
+
+
+[build-dependencies]
+bindgen = "0.63.0"
+cc = { version = "1.0", features = ["parallel"] }
