@@ -3,6 +3,7 @@ use std::{env, path::PathBuf};
 fn main() {
     println!("call build.rs");
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
+    env::set_var("_M_IX86", "1");
 
     cc::Build::new()
         .file("rewolf-wow64ext\\src\\wow64ext.cpp")
@@ -14,7 +15,6 @@ fn main() {
 
     bindgen::Builder::default()
         .header("src\\wrapper.hpp")
-        .enable_cxx_namespaces()
         .allowlist_function("X64Call")
         .allowlist_function("GetModuleHandle64")
         .allowlist_function("getNTDLL64")
@@ -30,7 +30,6 @@ fn main() {
         .allowlist_function("SetLastErrorFromX64Call")
         .layout_tests(false)
         .derive_debug(true)
-        .derive_copy(true)
         .derive_default(true)
         .generate()
         .expect("unable to generate bindings")
